@@ -23,20 +23,13 @@ public class ParserServlet extends HttpServlet {
             // Create a parser and parse the input
             G17Parser parser = new G17Parser(input);
             String result = parser.parse();
-
-            // Display the result
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Parser Result</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Parser Result</h1>");
-            out.println("<p>Input: " + input + "</p>");
-            out.println("<p>Result: " + result + "</p>");
-            out.println("<a href='index.html'>Try another expression</a>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            request.setAttribute("input", input);
+            request.setAttribute("result", result);
+                    
+            // Forward the request back to index.html (or index.jsp)
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            
         }
     }
 }
